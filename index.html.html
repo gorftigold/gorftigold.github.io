@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gorfti Gold — Linktree</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 60px 20px 80px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Fond texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .container {
+    width: 100%; max-width: 480px;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 16px;
+    position: relative; z-index: 1;
+  }
+
+  /* ── Profil ── */
+  .profile {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0;
+    margin-bottom: 24px;
+  }
+
+  .avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(201,168,76,0.4);
+    background: #111;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .avatar::before {
+    content: '';
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0%, #c9a84c 30%, transparent 60%, #c9a84c 80%, transparent 100%);
+    opacity: 0.3;
+  }
+  .avatar-text {
+    font-family: 'Cinzel', serif;
+    font-size: 22px; letter-spacing: 2px;
+    color: #c9a84c;
+  }
+
+  .profile-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px; letter-spacing: 6px;
+    color: #fff; text-align: center;
+  }
+  .profile-gold {
+    font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 8px;
+    color: #c9a84c; margin-top: 4px;
+  }
+  .profile-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, #c9a84c, transparent);
+    margin: 12px auto;
+  }
+  .profile-bio {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200; font-size: 11px;
+    letter-spacing: 3px; color: #666;
+    text-align: center; text-transform: uppercase;
+  }
+  .profile-country {
+    font-size: 12px; color: #c9a84c;
+    margin-top: 6px; letter-spacing: 2px;
+  }
+
+  /* ── Boutons ── */
+  .btn {
+    width: 100%;
+    display: flex; align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(255,255,255,0.03);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: slideIn 0.6s ease forwards;
+    opacity: 0;
+  }
+  .btn:nth-child(1) { animation-delay: 0.1s; }
+  .btn:nth-child(2) { animation-delay: 0.2s; }
+  .btn:nth-child(3) { animation-delay: 0.3s; }
+  .btn:nth-child(4) { animation-delay: 0.4s; }
+
+  .btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 100%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-2px); }
+  .btn:hover::before { opacity: 1; }
+
+  .btn-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .btn-content { flex: 1; }
+  .btn-title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px; letter-spacing: 2px;
+    color: #fff;
+  }
+  .btn-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200; font-size: 9px;
+    letter-spacing: 2px; color: #666;
+    margin-top: 3px; text-transform: uppercase;
+  }
+  .btn-arrow {
+    font-size: 10px; color: rgba(201,168,76,0.4);
+  }
+
+  /* Bouton WhatsApp — highlight */
+  .btn-primary {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.06);
+  }
+  .btn-primary .btn-title { color: #c9a84c; }
+
+  /* Bouton désactivé */
+  .btn-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .soon {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7px; letter-spacing: 3px;
+    color: #c9a84c; text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 2px 6px; margin-left: 8px;
+  }
+
+  @keyframes slideIn {
+    from { opacity:0; transform:translateY(12px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px; letter-spacing: 4px;
+    color: rgba(201,168,76,0.2);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Profil -->
+  <div class="profile">
+    <div class="avatar">
+      <div class="avatar-text">GG</div>
+    </div>
+    <div class="profile-name">GORFTI</div>
+    <div class="profile-gold">G O L D</div>
+    <div class="profile-line"></div>
+    <div class="profile-bio">Or · Élégance · Héritage</div>
+    <div class="profile-country">🇲🇦 Maroc</div>
+  </div>
+
+  <!-- Bouton 1 : WhatsApp -->
+  <a class="btn btn-primary" href="https://wa.me/212661481284">
+    <div class="btn-icon">💬</div>
+    <div class="btn-content">
+      <div class="btn-title">Contactez-nous</div>
+      <div class="btn-sub">Demandez votre devis · WhatsApp</div>
+    </div>
+    <div class="btn-arrow">→</div>
+  </a>
+
+  <!-- Bouton 2 : Google Business -->
+  <a class="btn" href="#">
+    <div class="btn-icon">📍</div>
+    <div class="btn-content">
+      <div class="btn-title">Nous trouver</div>
+      <div class="btn-sub">Google Maps · Guercif · Maroc</div>
+    </div>
+    <div class="btn-arrow">→</div>
+  </a>
+
+  <!-- Bouton 3 : Instagram -->
+  <a class="btn" href="https://instagram.com/gorfti.gold">
+    <div class="btn-icon">📸</div>
+    <div class="btn-content">
+      <div class="btn-title">@gorfti.gold</div>
+      <div class="btn-sub">Notre univers · Instagram</div>
+    </div>
+    <div class="btn-arrow">→</div>
+  </a>
+
+  <!-- Bouton 4 : Site web (bientôt) -->
+  <a class="btn btn-disabled">
+    <div class="btn-icon">🌐</div>
+    <div class="btn-content">
+      <div class="btn-title">Notre Site Web <span class="soon">Bientôt</span></div>
+      <div class="btn-sub">gorftigold.com · En construction</div>
+    </div>
+    <div class="btn-arrow">→</div>
+  </a>
+
+  <div class="footer">GORFTI GOLD © 2025</div>
+</div>
+</body>
+</html>
